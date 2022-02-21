@@ -1,10 +1,10 @@
 use serde::{Serialize, Deserialize};
 
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Deserialize, Debug)]
 pub struct CodeIn{
-    code: String,
-    title: String,
-    language: String,
-    tags: Vec<String>,
+    pub code: String,
+    pub title: String,
+    pub language: String,
+    pub tags: Vec<String>,
 }
