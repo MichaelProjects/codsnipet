@@ -1,3 +1,4 @@
+import 'package:codesnipet/controller/code_controller.dart';
 import 'package:codesnipet/screens/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (_) => SearchController())],
+        providers: [
+          ChangeNotifierProvider(create: (_) => SearchController()),
+          ChangeNotifierProvider(create: (_) => FetchController())
+        ],
         child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
             routerDelegate:

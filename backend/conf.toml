@@ -1,7 +1,7 @@
 [general]
 debug = true
-port = 28018
+port = 29000
 address = "0.0.0.0"
 
 [database]
-connection_string = "mongodb://user:password123@localhost:27017"
+connection_string = "mongodb://mongoAdmin:rlffHPFdDCrqBQdZh29b@app-dev.fynancial.de:27017"

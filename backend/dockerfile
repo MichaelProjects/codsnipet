@@ -1,0 +1,19 @@
+FROM rust:1.58.1 as builder
+ENV USER root
+WORKDIR /codesnipet
+COPY . .
+RUN rustup default nightly
+RUN rustup update
+RUN cargo build --release
+
+FROM ubuntu:21.04
+RUN apt update && apt install postgresql-client -y
+COPY --from=builder /backend/target/release/backend_codsnipet backend_codsnipet
+
+RUN useradd -u 8877 notroot
+
+RUN mkdir -p /var/log/opensight/
+RUN chmod -R 777 /var/log/opensight
+ENV RUST_LOG=debug
+USER notroot
+CMD ["./backend_codsnipet"]

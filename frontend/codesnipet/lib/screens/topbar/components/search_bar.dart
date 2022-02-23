@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:codesnipet/controller/search_controller.dart';
+import 'package:codesnipet/utils/customer_color.dart';
 import 'package:coolicons/coolicons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,19 +42,44 @@ class _SearchbarComponentState extends State<SearchbarComponent> {
             ? CircularProgressIndicator()
             : Icon(Coolicons.search));
     var data = MediaQuery.of(context).size;
-    return Container(
-        decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-        width: data.width * 0.44,
+
+    Widget createSnipet = Container(
         height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+          color: CustomColor.chipBackground,
+          borderRadius: BorderRadius.circular(90),
+        ),
         child: Center(
-            child: TextField(
-          controller: _controller,
-          onChanged: _onChangeHandler,
-          decoration: inputDecoration,
-        )));
+            child: InkWell(
+                onHover: (value) {},
+                onTap: () {
+                  print("create new snipet");
+                },
+                child: Center(
+                    child: Icon(Coolicons.plus_circle_outline,
+                        color: CustomColor.green)))));
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+            decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.all(Radius.circular(10))),
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+            width: data.width * 0.44,
+            height: 50,
+            child: Center(
+                child: TextField(
+              controller: _controller,
+              onChanged: _onChangeHandler,
+              decoration: inputDecoration,
+            ))),
+        createSnipet,
+      ],
+    );
   }
 }
