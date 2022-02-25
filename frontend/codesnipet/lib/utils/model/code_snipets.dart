@@ -10,13 +10,18 @@ class CodeSnip {
       this.id, this.title, this.code, this.language, this.tags, this.createAt);
 
   factory CodeSnip.fromJson(Map<String, dynamic> json) {
+    List<String> tags = [];
+    for (String x in json['tags']) {
+      tags.add(x);
+    }
+    int timestamp = int.parse(json['create_at']["\$date"]["\$numberLong"]);
     return CodeSnip(
       json['_id']["\$oid"],
       json['title'],
       json['code'],
       json['language'],
-      json['tags'],
-      DateTime.parse(json['create_at']["\$date"]),
+      tags,
+      DateTime.fromMillisecondsSinceEpoch(timestamp),
     );
   }
   factory CodeSnip.mockData() {

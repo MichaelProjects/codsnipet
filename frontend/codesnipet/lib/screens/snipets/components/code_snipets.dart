@@ -43,7 +43,7 @@ class CodeSnipets extends StatelessWidget {
                   margin: EdgeInsets.only(left: 10, bottom: 20),
                   child: Text(
                     data.title,
-                    style: TextStyle(fontSize: 20, letterSpacing: 0.4),
+                    style: TextStyle(fontSize: 16, letterSpacing: 0.4),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   )),
@@ -52,7 +52,6 @@ class CodeSnipets extends StatelessWidget {
                 margin: EdgeInsets.only(left: 10, bottom: 20),
                 child: GestureDetector(
                     onTap: () {
-                      print("Tap");
                       Clipboard.setData(ClipboardData(text: data.code))
                           .then((value) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -74,7 +73,7 @@ class CodeSnipets extends StatelessWidget {
                     child: Wrap(children: string2Chip(data.tags))),
                 Expanded(
                     child: Container(
-                        margin: EdgeInsets.only(left: 50),
+                        margin: EdgeInsets.only(left: 30),
                         child: Row(
                           children: [Text(data.language)],
                         ))),
