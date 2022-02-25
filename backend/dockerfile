@@ -8,7 +8,7 @@ RUN cargo build --release
 
 FROM ubuntu:21.04
 RUN apt update && apt install postgresql-client -y
-COPY --from=builder /backend/target/release/backend_codsnipet backend_codsnipet
+COPY --from=builder /codesnipet/target/release/backend_codsnipet backend_codsnipet
 
 RUN useradd -u 8877 notroot
 
