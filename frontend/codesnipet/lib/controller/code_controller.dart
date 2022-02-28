@@ -28,4 +28,9 @@ class FetchController with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  removeCode(String id) {
+    _data.removeWhere((element) => element.id == id);
+    notifyListeners();
+  }
 }

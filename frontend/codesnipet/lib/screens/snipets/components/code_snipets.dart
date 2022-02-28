@@ -1,24 +1,30 @@
+import 'package:codesnipet/controller/code_controller.dart';
+import 'package:codesnipet/controller/crud_code.dart';
 import 'package:codesnipet/utils/customer_color.dart';
 import 'package:codesnipet/utils/model/code_snipets.dart';
 import 'package:coolicons/coolicons.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/theme_map.dart';
+import 'package:provider/provider.dart';
 
 class CodeSnipets extends StatelessWidget {
   CodeSnip data;
-  CodeSnipets(this.data);
+  CodeSnipets(this.data, {Key? key}) : super(key: key);
   double width = 400;
   double height = 300;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    FetchController fetchController = Provider.of<FetchController>(context);
+    CRUDController crudController = Provider.of<CRUDController>(context);
 
     Widget details = Container(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(10),
         margin: EdgeInsets.only(bottom: 15, left: 10, right: 10, top: 5),
-        height: 90,
+        height: 95,
         width: 370,
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.dark
@@ -95,7 +101,9 @@ class CodeSnipets extends StatelessWidget {
 
               // Specify highlight theme
               // All available themes are listed in `themes` folder
-              theme: themeMap["a11y-dark"]!,
+              theme: themeMap[Theme.of(context).brightness == Brightness.light
+                  ? "a11y-light"
+                  : "atelier-dune-dark"]!,
               // Specify padding
               padding: EdgeInsets.all(12),
 
@@ -106,18 +114,56 @@ class CodeSnipets extends StatelessWidget {
               ),
             ))));
 
-    return Container(
-        height: 300,
-        width: 400,
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [codePreview, details],
-        ));
+    Future<void> _onPointerDown(TapDownDetails event) async {
+      // Check if right mouse button clicked
+      print(event);
+      if (event.kind == PointerDeviceKind.mouse) {
+        final overlay =
+            Overlay.of(context)!.context.findRenderObject() as RenderBox;
+
+        final menuItem = await showMenu<int>(
+            context: context,
+            items: [
+              PopupMenuItem(child: Text('Delete'), value: 1),
+            ],
+            position: RelativeRect.fromSize(
+                event.globalPosition & Size(48.0, 48.0), overlay.size));
+        // Check if menu item clicked
+        switch (menuItem) {
+          case 1:
+            await crudController.deleteCode(data.id);
+            if (crudController.curd == CURDState.idle) {
+              fetchController.removeCode(data.id);
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Deleted codesnippet'),
+                behavior: SnackBarBehavior.floating,
+              ));
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('An error occured'),
+                behavior: SnackBarBehavior.floating,
+              ));
+            }
+            break;
+          default:
+        }
+      }
+    }
+
+    return GestureDetector(
+        onTapDown: _onPointerDown,
+        child: Container(
+            height: 300,
+            width: 400,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [codePreview, details],
+            )));
   }
 }
 

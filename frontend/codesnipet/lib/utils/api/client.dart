@@ -18,4 +18,30 @@ class ApiClient {
     if (response["error"] == true) {}
     return response["data"];
   }
+
+  Future<Map> createCodeSnipett(
+      String language, String title, String code, List<String> tags) async {
+    Map response = await HttpClient().post(Urls.createCode,
+        {"language": language, "title": title, "code": code, "tags": tags});
+    if (response["error"] == true) {
+      return response;
+    }
+    return response["data"];
+  }
+
+  Future deleteCode(String id) async{
+    Map response = await HttpClient().delete(Urls.deleteCode(id));
+    if (response["error"] == true) {
+      return response;
+    }
+    return response["data"];
+  }
+
+  Future searchCode(String searchTerm) async {
+    Map response = await HttpClient().get(Urls.searchCode(searchTerm));
+    if (response["error"] == true) {
+      return response;
+    }
+    return response["data"];
+  }
 }

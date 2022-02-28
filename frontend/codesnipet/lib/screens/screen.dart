@@ -2,7 +2,7 @@ import 'package:codesnipet/controller/code_controller.dart';
 import 'package:codesnipet/screens/snipets/components/code_snipets.dart';
 import 'package:codesnipet/screens/topbar/components/search_bar.dart';
 import 'package:codesnipet/screens/topbar/topbar.dart';
-import 'package:codesnipet/utils/model/code_snipets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,7 +56,7 @@ class MainScreenState extends State<MainScreen> {
                     print("fetched");
                     List<Widget> widgets = [];
                     for (var x in fetchController.data) {
-                      widgets.add(CodeSnipets(x));
+                      widgets.add(CodeSnipets(x, key: Key(x.id)));
                     }
                     return LayoutBuilder(builder: (context, constraints) {
                       return GridView.count(

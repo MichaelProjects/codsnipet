@@ -1,4 +1,5 @@
 import 'package:codesnipet/controller/code_controller.dart';
+import 'package:codesnipet/controller/crud_code.dart';
 import 'package:codesnipet/screens/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => SearchController()),
-          ChangeNotifierProvider(create: (_) => FetchController())
+          ChangeNotifierProvider(create: (_) => FetchController()),
+          ChangeNotifierProvider(create: (_) => CRUDController()),
         ],
         child: MaterialApp.router(
             debugShowCheckedModeBanner: false,

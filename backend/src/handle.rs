@@ -7,7 +7,7 @@ use crate::config::ConfigGeneral;
 use crate::models::CodeIn;
 use crate::response::ApiResponse;
 use crate::code::Code;
-use crate::code_dao::{insert_code_snipet, delete_code_snipet, get_code_snipet, get_all_code_snipets, update_code_snipet};
+use crate::code_dao::{insert_code_snipet, delete_code_snipet, get_code_snipet, get_all_code_snipets, update_code_snipet, search_code_snippets};
 
 
 #[post("/code", data = "<payload>")]
@@ -40,6 +40,15 @@ pub async fn delete_entry_endpoint(settings: &State<ConfigGeneral>, code_id: Str
 #[get("/code/<code_id>")]
 pub async fn get_entry(settings: &State<ConfigGeneral>, code_id: String) -> ApiResponse{
     let result = get_code_snipet(&settings.database.connection_string, code_id).await;
+    match result{
+        Ok(code) => ApiResponse::new(Status::Ok, json!({"data": code})),
+        Err(err) => ApiResponse::new(Status::NotFound, json!({"error": "Failed"}))
+    }
+}
+
+#[get("/code/<q>")]
+pub async fn get_search(settings: &State<ConfigGeneral>, q: String) -> ApiResponse{
+    let result = search_code_snippets(&settings.database.connection_string, q).await;
     match result{
         Ok(code) => ApiResponse::new(Status::Ok, json!({"data": code})),
         Err(err) => ApiResponse::new(Status::NotFound, json!({"error": "Failed"}))

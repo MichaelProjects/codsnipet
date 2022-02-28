@@ -88,3 +88,15 @@ pub async fn get_all_code_snipets(db_url: &String, limit: i32, site: i32) -> Res
     }
     Ok(code_snipets)
 }
+
+pub async fn search_code_snippets(db_url: &String, query: String) -> Result<Vec<Code>, Box<dyn Error>>{
+    let mut result = Vec::new();
+    let database = get_client(db_url).await?.database("codsnipet");
+    let typed_collection = database.collection::<Code>("snippets");
+    let filter = doc! { "title": &query, "tags": { "$gt" : query }  };
+    let mut cursor = typed_collection.find(filter, None).await?;
+    while let Some(code) = cursor.try_next().await? {
+        result.push(code);
+    }
+    Ok(result)
+}

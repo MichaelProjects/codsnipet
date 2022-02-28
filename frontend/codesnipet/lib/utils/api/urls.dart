@@ -1,5 +1,5 @@
 class Urls {
-  static const String host = "localhost:29000";
+  static const String host = "http://localhost";
   static Uri getCode(String codeId) {
     return Uri.parse('$host/api/v1/code/$codeId');
   }
@@ -16,5 +16,9 @@ class Urls {
 
   static Uri updateCode(String codeId) {
     return Uri.parse('$host/api/v1/code/$codeId');
+  }
+
+  static Uri searchCode(String searchTerm) {
+    return Uri.parse('$host/api/v1/code?q=$searchTerm');
   }
 }

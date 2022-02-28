@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:codesnipet/controller/search_controller.dart';
+import 'package:codesnipet/screens/create_snipets/create_snipet.dart';
 import 'package:codesnipet/utils/customer_color.dart';
 import 'package:coolicons/coolicons.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,8 @@ class _SearchbarComponentState extends State<SearchbarComponent> {
                 onHover: (value) {},
                 onTap: () {
                   print("create new snipet");
+                  showDialog(
+                      context: context, builder: (context) => CreateSnipets());
                 },
                 child: Center(
                     child: Icon(Coolicons.plus_circle_outline,
