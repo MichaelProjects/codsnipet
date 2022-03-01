@@ -46,8 +46,9 @@ pub async fn get_entry(settings: &State<ConfigGeneral>, code_id: String) -> ApiR
     }
 }
 
-#[get("/code/<q>")]
+#[get("/code/search?<q>")]
 pub async fn get_search(settings: &State<ConfigGeneral>, q: String) -> ApiResponse{
+    println!("{}", q);
     let result = search_code_snippets(&settings.database.connection_string, q).await;
     match result{
         Ok(code) => ApiResponse::new(Status::Ok, json!({"data": code})),

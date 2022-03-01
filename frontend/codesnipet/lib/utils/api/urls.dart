@@ -1,5 +1,5 @@
 class Urls {
-  static const String host = "http://localhost;
+  static const String host = "https://app-dev.fynancial.de";
   static Uri getCode(String codeId) {
     return Uri.parse('$host/api/v1/code/$codeId');
   }

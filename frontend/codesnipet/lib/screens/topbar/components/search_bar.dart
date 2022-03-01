@@ -30,7 +30,11 @@ class _SearchbarComponentState extends State<SearchbarComponent> {
   }
 
   search(value) {
-    print('hello world from search . the value is $value');
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      SearchController searchController =
+          Provider.of<SearchController>(context, listen: false);
+      searchController.search(value);
+    });
   }
 
   @override

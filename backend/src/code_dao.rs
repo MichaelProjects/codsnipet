@@ -93,7 +93,11 @@ pub async fn search_code_snippets(db_url: &String, query: String) -> Result<Vec<
     let mut result = Vec::new();
     let database = get_client(db_url).await?.database("codsnipet");
     let typed_collection = database.collection::<Code>("snippets");
-    let filter = doc! { "title": &query, "tags": { "$gt" : query }  };
+    let query_stirng = format!(".*{}.*", &query);
+    let filter = doc! { "$or": [
+        {"title": {"$regex": &query_stirng}},
+        {"tags": { "$regex": &query_stirng }},
+        ]};
     let mut cursor = typed_collection.find(filter, None).await?;
     while let Some(code) = cursor.try_next().await? {
         result.push(code);

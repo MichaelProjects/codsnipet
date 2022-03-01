@@ -12,7 +12,7 @@ mod dao_error;
 use rocket::{Build, Rocket};
 use rocket::figment::Figment;
 use crate::config::ConfigGeneral;
-use crate::handle::{create_entry, update_entry_endpoint, delete_entry_endpoint, get_entry, get_all_entries};
+use crate::handle::{create_entry, update_entry_endpoint, delete_entry_endpoint, get_entry, get_all_entries, get_search};
 
 
 pub fn insert_conf_values(conf: &ConfigGeneral) -> Figment {
@@ -28,7 +28,7 @@ pub fn rocket_creator(conf: ConfigGeneral) -> Rocket<Build> {
         .manage(conf)
         .mount(
             "/api/v1",
-            routes![create_entry, update_entry_endpoint, delete_entry_endpoint, get_entry, get_all_entries],
+            routes![create_entry, update_entry_endpoint, delete_entry_endpoint, get_entry, get_all_entries, get_search],
         )
 }
 

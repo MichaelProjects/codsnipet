@@ -1,4 +1,5 @@
 import 'package:codesnipet/controller/code_controller.dart';
+import 'package:codesnipet/controller/search_controller.dart';
 import 'package:codesnipet/screens/snipets/components/code_snipets.dart';
 import 'package:codesnipet/screens/topbar/components/search_bar.dart';
 import 'package:codesnipet/screens/topbar/topbar.dart';
@@ -27,6 +28,7 @@ class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     FetchController fetchController = Provider.of<FetchController>(context);
+    SearchController searchController = Provider.of<SearchController>(context);
     var data = MediaQuery.of(context).size;
     return Scaffold(
         body: Column(
