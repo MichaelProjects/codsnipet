@@ -35,7 +35,7 @@ Enter your correct backend URL in the host field and click on the update button.
 Finally, you can start using the application.
 
 ## Web Version
-If the current release contains a web version, you are able to deploy the build a regualr static website. Normally you could use nginx, but dont forget to handle CORS.
+If the current release contains a web version, you are able to deploy the build as a regular static website. Normally you could use nginx, but dont forget to handle CORS.
 
 ## Platforms
 Currently i only provide a frontend version for macos, but i will soon add a frontend for windows and linux.
