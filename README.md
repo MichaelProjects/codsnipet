@@ -1,5 +1,7 @@
 ## Codesnipt
-An application to store and index your code snippets.
+An application to store and index your code snippets. 
+
+![Frontend-screenshot](/img/img1.png)
 
 
 ## Install
@@ -27,9 +29,13 @@ So that the frontend is able to communicate with the backend, we need to specify
 
 Open the installed frontend and click on the settings tab.
 
+![Frontend-screenshot](/img/img2.png)
 Enter your correct backend URL in the host field and click on the update button.
 
 Finally, you can start using the application.
+
+## Web Version
+If the current release contains a web version, you are able to deploy the build a regualr static website. Normally you could use nginx, but dont forget to handle CORS.
 
 ## Platforms
 Currently i only provide a frontend version for macos, but i will soon add a frontend for windows and linux.
