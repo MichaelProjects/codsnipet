@@ -59,7 +59,6 @@ class _SearchbarComponentState extends State<SearchbarComponent> {
             child: InkWell(
                 onHover: (value) {},
                 onTap: () {
-                  print("create new snipet");
                   showDialog(
                       context: context, builder: (context) => CreateSnipets());
                 },

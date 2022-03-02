@@ -1,5 +1,7 @@
+import 'package:codesnipet/controller/settings_controller.dart';
+
 class Urls {
-  static const String host = "https://app-dev.fynancial.de";
+  static String host = "localhost:28029";
   static Uri getCode(String codeId) {
     return Uri.parse('$host/api/v1/code/$codeId');
   }
@@ -19,6 +21,6 @@ class Urls {
   }
 
   static Uri searchCode(String searchTerm) {
-    return Uri.parse('$host/api/v1/code?q=$searchTerm');
+    return Uri.parse('$host/api/v1/code/search?q=$searchTerm');
   }
 }

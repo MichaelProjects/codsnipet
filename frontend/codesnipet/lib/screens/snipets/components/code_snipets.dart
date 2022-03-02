@@ -14,7 +14,7 @@ class CodeSnipets extends StatelessWidget {
   CodeSnip data;
   CodeSnipets(this.data, {Key? key}) : super(key: key);
   double width = 400;
-  double height = 300;
+  double height = 400;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -24,7 +24,7 @@ class CodeSnipets extends StatelessWidget {
     Widget details = Container(
         padding: EdgeInsets.all(10),
         margin: EdgeInsets.only(bottom: 15, left: 10, right: 10, top: 5),
-        height: 95,
+        height: 80,
         width: 370,
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.dark
@@ -46,16 +46,16 @@ class CodeSnipets extends StatelessWidget {
             Row(children: [
               Container(
                   width: width * 0.70,
-                  margin: EdgeInsets.only(left: 10, bottom: 20),
+                  margin: EdgeInsets.only(left: 10, bottom: 5),
                   child: Text(
                     data.title,
-                    style: TextStyle(fontSize: 16, letterSpacing: 0.4),
+                    style: TextStyle(fontSize: 14, letterSpacing: 0.4),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   )),
               Expanded(
                   child: Container(
-                margin: EdgeInsets.only(left: 10, bottom: 20),
+                margin: EdgeInsets.only(left: 10, bottom: 5),
                 child: GestureDetector(
                     onTap: () {
                       Clipboard.setData(ClipboardData(text: data.code))
@@ -75,7 +75,7 @@ class CodeSnipets extends StatelessWidget {
               children: [
                 Container(
                     width: width * 0.65,
-                    height: 30,
+                    height: 25,
                     child: Wrap(children: string2Chip(data.tags))),
                 Expanded(
                     child: Container(
@@ -114,10 +114,10 @@ class CodeSnipets extends StatelessWidget {
               ),
             ))));
 
-    Future<void> _onPointerDown(TapDownDetails event) async {
+    Future<void> _onPointerDown(event) async {
       // Check if right mouse button clicked
-      print(event);
-      if (event.kind == PointerDeviceKind.mouse) {
+      if (event.kind == PointerDeviceKind.mouse &&
+          event.buttons == kSecondaryMouseButton) {
         final overlay =
             Overlay.of(context)!.context.findRenderObject() as RenderBox;
 
@@ -127,7 +127,7 @@ class CodeSnipets extends StatelessWidget {
               PopupMenuItem(child: Text('Delete'), value: 1),
             ],
             position: RelativeRect.fromSize(
-                event.globalPosition & Size(48.0, 48.0), overlay.size));
+                event.position & Size(48.0, 48.0), overlay.size));
         // Check if menu item clicked
         switch (menuItem) {
           case 1:
@@ -150,8 +150,8 @@ class CodeSnipets extends StatelessWidget {
       }
     }
 
-    return GestureDetector(
-        onTapDown: _onPointerDown,
+    return Listener(
+        onPointerDown: _onPointerDown,
         child: Container(
             height: 300,
             width: 400,
@@ -175,7 +175,7 @@ List<Widget> string2Chip(List<String> data) {
       label: Text(i,
           style: TextStyle(
               color: CustomColor.green,
-              fontSize: 12,
+              fontSize: 10,
               fontWeight: FontWeight.bold)),
     ));
   }

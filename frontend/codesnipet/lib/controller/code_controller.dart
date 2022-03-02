@@ -14,7 +14,6 @@ class FetchController with ChangeNotifier {
     _state = FetcherState.loading;
     notifyListeners();
     Map data = await ApiClient().getAllSnipets(limit, site);
-    print(data);
     if (data["error"] == true) {
       _state = FetcherState.failed;
       notifyListeners();

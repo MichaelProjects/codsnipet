@@ -1,3 +1,6 @@
+import 'package:codesnipet/screens/settings/settings.dart';
+import 'package:codesnipet/utils/customer_color.dart';
+import 'package:coolicons/coolicons.dart';
 import 'package:flutter/material.dart';
 
 import 'components/logo_container.dart';
@@ -13,6 +16,24 @@ class TopBar extends StatefulWidget {
 class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
+    Widget settings = Container(
+        margin: EdgeInsets.all(10),
+        height: 40,
+        width: 40,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(90),
+        ),
+        child: Center(
+            child: InkWell(
+                onHover: (value) {},
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => SetttingsScreen());
+                },
+                child: Center(
+                    child:
+                        Icon(Coolicons.settings, color: CustomColor.green)))));
     var size = MediaQuery.of(context).size;
     return Container(
         decoration: BoxDecoration(
@@ -24,6 +45,7 @@ class _TopBarState extends State<TopBar> {
           children: [
             //const LogoContainer(),
             Expanded(child: Container()),
+            settings,
             const Profile()
           ],
         ));
