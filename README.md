@@ -31,6 +31,9 @@ Enter your correct backend URL in the host field and click on the update button.
 
 Finally, you can start using the application.
 
+## Platforms
+Currently i only provide a frontend version for macos, but i will soon add a frontend for windows and linux.
+
 
 ## Techstack
 - Rust(Rocket)
