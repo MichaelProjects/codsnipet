@@ -1,0 +1,7 @@
+[general]
+debug = true
+port = 28029
+address = "0.0.0.0"
+
+[database]
+connection_string = "mongodb://localhost:27017"

@@ -16,7 +16,7 @@ class Profile extends StatelessWidget {
               backgroundColor: Colors.grey,
             )),
         const SizedBox(width: 15),
-        const Text("Michael Lichtenecker"),
+        const Text("Max Mustermann"),
         IconButton(onPressed: () {}, icon: const Icon(Coolicons.caret_down))
       ],
     );
