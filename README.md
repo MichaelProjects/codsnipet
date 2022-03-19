@@ -1,3 +1,4 @@
+
 ## Codesnipt
 An application to store and index your code snippets. 
 
@@ -38,8 +39,10 @@ Finally, you can start using the application.
 If the current release contains a web version, you are able to deploy the build as a regular static website. Normally you could use nginx, but dont forget to handle CORS.
 
 ## Platforms
-- Linux via Snap ()
-- MacOS via Homebrew ()
+- Linux(snap)
+- MacOS(brew)
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/codsnipet)
 
 
 ## Techstack

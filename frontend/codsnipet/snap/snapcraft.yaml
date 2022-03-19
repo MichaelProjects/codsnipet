@@ -9,7 +9,7 @@ grade: stable
 
 apps:
   codsnipet:
-    command: codsnipet
+    command: Codsnipet
     extensions: [flutter-master]
 
 parts:
