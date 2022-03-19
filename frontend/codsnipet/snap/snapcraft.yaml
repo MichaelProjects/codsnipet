@@ -1,0 +1,20 @@
+name: codsnipet
+version: "1.1.0"
+summary: An application, to organize, label and search your code snippets.
+description: An application, to organize, label and search your code snippets. Safe time on your next project setup.
+
+confinement: strict
+base: core18
+grade: stable
+
+apps:
+  codsnipet:
+    command: codsnipet
+    extensions: [flutter-master]
+
+parts:
+  codsnipet:
+    plugin: flutter
+    source: .
+    flutter-target: lib/main.dart
+

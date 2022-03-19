@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=codsnipet
+Comment=An application, to organize, label and search your code snippets.
+Exec=codsnipet
+Icon=${SNAP}/meta/gui/codsnipet.png
+Terminal=false
+Type=Application
+Categories=Development;
