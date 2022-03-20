@@ -39,10 +39,18 @@ Finally, you can start using the application.
 If the current release contains a web version, you are able to deploy the build as a regular static website. Normally you could use nginx, but dont forget to handle CORS.
 
 ## Platforms
-- Linux(snap)
+The frontend application are available for following platforms: 
+
 - MacOS(brew)
+```bash
+brew tap MichaelProjects/codsnipet
+brew install codsnipet
+```
+- Linux(snap)
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/codsnipet)
+
+- [Web](https://demo-console.vercise.io/)
 
 
 ## Techstack

@@ -1,0 +1,27 @@
+version: '3.5'
+
+services:
+  mongodb_stackblog:
+    image: mongo:latest
+    container_name: "mongo"
+    environment:
+      - "MONGO_INITDB_ROOT_USERNAME=admin"
+      - "MONGO_INITDB_ROOT_PASSWORD=example"
+    volumes:
+      - ./mongo-volume:/data/db
+      #- /srv/ssl/exmaple/exmaple.pem:/etc/ssl/certs/exmaple.pem
+    ports:
+      - 27017:27017
+    command:
+      - "--auth"
+      - "--bind_ip=0.0.0.0"
+      #- "--tlsMode=requireTLS"
+      #- "--tlsCertificateKeyFile=/etc/ssl/certs/exmaple.pem"
+
+  codesnipet:
+      image:  michaellichtenecker/codesnipt:latest
+      restart: always
+      expose:
+        - 29000
+      volumes:
+        - /srv/development_env/codesnipet/conf.toml:/conf.toml
