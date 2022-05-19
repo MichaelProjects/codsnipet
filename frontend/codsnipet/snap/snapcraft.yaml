@@ -10,6 +10,8 @@ grade: stable
 apps:
   codsnipet:
     command: Codsnipet
+    plugs:
+    - network
     extensions: [flutter-master]
 
 parts:
