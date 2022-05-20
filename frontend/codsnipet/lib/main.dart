@@ -1,25 +1,12 @@
 import 'package:codsnipet/controller/code_controller.dart';
 import 'package:codsnipet/controller/crud_code.dart';
-import 'package:codsnipet/screens/screen.dart';
 import 'package:flutter/material.dart';
-import 'package:menubar/menubar.dart';
 import 'package:provider/provider.dart';
 import 'package:routemaster/routemaster.dart';
-
 import 'controller/search_controller.dart';
-import 'controller/settings_controller.dart';
-import 'utils/api/urls.dart';
 import 'utils/dark_theme.dart';
 import 'utils/light_theme.dart';
 import 'utils/nav_route.dart';
-
-Submenu subMenue = Submenu(label: "Settings", children: [
-  MenuItem(
-      label: "edit",
-      onClicked: () {
-        print("Hello world");
-      })
-]);
 
 void main() async {
   //setApplicationMenu([subMenue]);
