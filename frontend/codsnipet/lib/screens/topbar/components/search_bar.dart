@@ -52,19 +52,18 @@ class _SearchbarComponentState extends State<SearchbarComponent> {
         height: 50,
         width: 50,
         decoration: BoxDecoration(
-          color: CustomColor.chipBackground,
+          //color: CustomColor.chipBackground,
           borderRadius: BorderRadius.circular(90),
         ),
-        child: Center(
-            child: InkWell(
-                onHover: (value) {},
-                onTap: () {
-                  showDialog(
-                      context: context, builder: (context) => CreateSnipets());
-                },
-                child: Center(
-                    child: Icon(Coolicons.plus_circle_outline,
-                        color: CustomColor.green)))));
+        child: InkWell(
+            onHover: (value) {},
+            onTap: () {
+              showDialog(
+                  context: context, builder: (context) => CreateSnipets());
+            },
+            child: Center(
+                child: Icon(Coolicons.plus_circle_outline,
+                    color: CustomColor.green))));
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,

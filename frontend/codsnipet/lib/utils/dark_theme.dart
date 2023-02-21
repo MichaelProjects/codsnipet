@@ -8,7 +8,7 @@ ThemeData buildDarkThemeData(BuildContext context) {
       fontFamily: "Camby",
       textTheme: buildTextTheme(context),
       brightness: Brightness.dark,
-      primaryColor: Colors.black38,
+      primaryColor: Color.fromRGBO(29, 31, 33, 1),
       primarySwatch: CustomColor.swatch,
       backgroundColor: Colors.white);
 }

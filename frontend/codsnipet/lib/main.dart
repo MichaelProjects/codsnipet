@@ -9,7 +9,6 @@ import 'utils/light_theme.dart';
 import 'utils/nav_route.dart';
 
 void main() async {
-  //setApplicationMenu([subMenue]);
   runApp(const MyApp());
 }
 
@@ -25,14 +24,16 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => FetchController()),
           ChangeNotifierProvider(create: (_) => CRUDController()),
         ],
-        child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            routerDelegate:
-                RoutemasterDelegate(routesBuilder: (context) => routes),
-            // ignore: prefer_const_constructors
-            routeInformationParser: RoutemasterParser(),
-            title: 'Codsnipet',
-            darkTheme: buildDarkThemeData(context),
-            theme: buildLightThemeData(context)));
+        child: PlatformMenuBar(
+            menus: [],
+            child: MaterialApp.router(
+                debugShowCheckedModeBanner: false,
+                routerDelegate:
+                    RoutemasterDelegate(routesBuilder: (context) => routes),
+                // ignore: prefer_const_constructors
+                routeInformationParser: RoutemasterParser(),
+                title: 'Codsnipet',
+                darkTheme: buildDarkThemeData(context),
+                theme: buildLightThemeData(context))));
   }
 }

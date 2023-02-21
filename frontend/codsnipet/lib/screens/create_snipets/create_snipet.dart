@@ -84,7 +84,7 @@ class _CreateSnipetsState extends State<CreateSnipets> {
                         if (crudController.curd == CURDState.idle) {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(SnackBar(content: Text("Created")));
-                          fetchController.fetchData(30, 0);
+                          await fetchController.fetchData(30, 0);
                           Navigator.pop(context);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

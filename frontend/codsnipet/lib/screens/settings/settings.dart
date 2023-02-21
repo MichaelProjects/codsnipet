@@ -1,6 +1,7 @@
 import 'package:codsnipet/controller/code_controller.dart';
 import 'package:codsnipet/controller/settings_controller.dart';
 import 'package:codsnipet/utils/api/urls.dart';
+import 'package:codsnipet/utils/customer_color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,11 @@ class SetttingsScreen extends StatelessWidget {
   const SetttingsScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    const List<Widget> themes = <Widget>[
+      Text('Light'),
+      Text('Dark'),
+    ];
+    final List<bool> isSelected = <bool>[true, false];
     TextEditingController baseUrlController = TextEditingController();
     FetchController fetchController = Provider.of<FetchController>(context);
     var data = MediaQuery.of(context).size;
@@ -25,10 +31,21 @@ class SetttingsScreen extends StatelessWidget {
                   decoration: const InputDecoration(
                       labelText: "Host", hintText: "https://example.com"),
                 ),
-                Expanded(child: Container(height: 1000)),
+                Expanded(child: Container()),
                 Center(
                   child: TextButton(
-                    style: const ButtonStyle(),
+                    style: ButtonStyle(backgroundColor:
+                        MaterialStateProperty.resolveWith<Color?>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed)) {
+                          return Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withOpacity(0.5);
+                        }
+                        return null; // Use the component's default.
+                      },
+                    )),
                     child: const Text("Update",
                         style: TextStyle(color: Colors.white)),
                     onPressed: () async {

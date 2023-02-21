@@ -23,9 +23,8 @@ class CodeSnipets extends StatelessWidget {
 
     Widget details = Container(
         padding: EdgeInsets.all(10),
-        margin: EdgeInsets.only(bottom: 15, left: 10, right: 10, top: 5),
+        margin: EdgeInsets.only(bottom: 0, left: 0, right: 0, top: 5),
         height: 80,
-        width: 370,
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.dark
               ? null
@@ -34,7 +33,7 @@ class CodeSnipets extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 color: Color(0x3f000000),
-                offset: Offset(0, 2),
+                offset: Offset(0, 1),
                 blurRadius: 4,
                 spreadRadius: 0)
           ],
@@ -45,7 +44,7 @@ class CodeSnipets extends StatelessWidget {
           children: [
             Row(children: [
               Container(
-                  width: width * 0.70,
+                  width: width * 0.75,
                   margin: EdgeInsets.only(left: 10, bottom: 5),
                   child: Text(
                     data.title,
@@ -55,32 +54,39 @@ class CodeSnipets extends StatelessWidget {
                   )),
               Expanded(
                   child: Container(
-                margin: EdgeInsets.only(left: 10, bottom: 5),
-                child: GestureDetector(
-                    onTap: () {
-                      Clipboard.setData(ClipboardData(text: data.code))
-                          .then((value) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Code copied to clipboard")));
-                      }); //
-                    },
-                    child: Center(
-                        child: Icon(
-                      Coolicons.copy,
-                      color: CustomColor.green,
-                    ))),
-              ))
+                      margin: EdgeInsets.only(left: 10, bottom: 5),
+                      child: Align(
+                          alignment: Alignment.centerRight,
+                          child: FittedBox(
+                            child: GestureDetector(
+                                onTap: () {
+                                  Clipboard.setData(
+                                          ClipboardData(text: data.code))
+                                      .then((value) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                "Code copied to clipboard")));
+                                  }); //
+                                },
+                                child: Center(
+                                    child: Icon(
+                                  Coolicons.copy,
+                                  color: CustomColor.green,
+                                ))),
+                          ))))
             ]),
             Row(
               children: [
-                Container(
-                    width: width * 0.65,
-                    height: 25,
-                    child: Wrap(children: string2Chip(data.tags))),
                 Expanded(
+                    child: Container(
+                        height: 25,
+                        child: Wrap(children: string2Chip(data.tags)))),
+                FittedBox(
                     child: Container(
                         margin: EdgeInsets.only(left: 30),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [Text(data.language)],
                         ))),
               ],
@@ -91,7 +97,8 @@ class CodeSnipets extends StatelessWidget {
         child: Container(
             margin: EdgeInsets.only(top: 10, left: 10, right: 10),
             child: SingleChildScrollView(
-                child: HighlightView(
+                child: Expanded(
+                    child: HighlightView(
               // The original code to be highlighted
               data.code,
 
@@ -103,23 +110,23 @@ class CodeSnipets extends StatelessWidget {
               // All available themes are listed in `themes` folder
               theme: themeMap[Theme.of(context).brightness == Brightness.light
                   ? "a11y-light"
-                  : "atelier-dune-dark"]!,
+                  : "tomorrow-night"]!,
               // Specify padding
               padding: EdgeInsets.all(12),
 
               // Specify text style
               textStyle: TextStyle(
                 fontFamily: 'My awesome monospace font',
-                fontSize: 13,
+                fontSize: 15,
               ),
-            ))));
+            )))));
 
     Future<void> _onPointerDown(event) async {
       // Check if right mouse button clicked
       if (event.kind == PointerDeviceKind.mouse &&
           event.buttons == kSecondaryMouseButton) {
         final overlay =
-            Overlay.of(context)!.context.findRenderObject() as RenderBox;
+            Overlay.of(context).context.findRenderObject() as RenderBox;
 
         final menuItem = await showMenu<int>(
             context: context,
@@ -153,8 +160,7 @@ class CodeSnipets extends StatelessWidget {
     return Listener(
         onPointerDown: _onPointerDown,
         child: Container(
-            height: 300,
-            width: 400,
+            width: width,
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(5),
